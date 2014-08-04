@@ -25,6 +25,13 @@ sub process_file($)
         }
 
         # https://lh3.googleusercontent.com/-5qwoDzVXd2w/U9y4x3wZMbI/AAAAAAAAj8E/JF9jK-7VhyU/w1086-h611-no/2%2B-%2B2
+
+        # ["https://lh3.googleusercontent.com/5INsKlb735vF1BTekhKiRv_DlaFcBJkR",1600,2400]
+        elsif (m!\["(https://lh\d+\.googleusercontent\.com/[a-zA-Z0-9/_\-]+?)",(\d+),(\d+)\]!) {
+            my $url = sprintf '%s=w%s-h%s-p-no', $1, $2, $3;
+            $collect{$url} = 1 if not exists($collect{$url});
+            # print $url, "\n";
+        }
     }
 
     foreach (keys %collect) {
